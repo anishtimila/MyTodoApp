@@ -13,6 +13,7 @@ import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
 
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     // private access variable for our ListView
     private ListView mListView;
     // private access variable for our adapter
-    private ListAdapter mAdapter;
+    private ArrayAdapter mAdapter;
     // private access variable for our database object
     private MockDatabase db;
     // private access variable for our array list of strings
@@ -99,10 +100,12 @@ public class MainActivity extends AppCompatActivity {
         // requestCode == 1)
         switch (requestCode){
             case 1:
-                // Our user has input a new thing to the database, refresh the listview
+                // Our user has input a new thing to the database, refresh the ListView
                 mArrayList = db.getTodos();
-                mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mArrayList);
-                mListView.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+//                mArrayList = db.getTodos();
+//                mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mArrayList);
+//                mListView.setAdapter(mAdapter);
                 break;
             default:
                 break;
